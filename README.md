@@ -142,6 +142,146 @@ default
 
 
 
+https://github.com/tufailahm/galaxe2
+
+
+
+
+
+
+
+Function Calling
+
+Constructors
+String
+StringBuffer
+StringBuilder
+Inheritance
+Abstract class
+Interface
+Overloading 
+
+
+
+
+class A
+{
+	public void display()
+	{
+		
+	}
+	public static void main(String args[])
+	{
+		display();	
+	}
+}
+
+
+
+Constructors
+=================
+a special method which has the same name as the class name
+it does not have any return type not even void
+it gets called automatically whenever you create an object
+is used to initilize instance variables
+
+
+this keyword
+==========
+it refers to the current object
+
+
+String
+==============
+class - java .lang package
+it is immutable - cannot be changed
+array of characters
+lots of useful methods
+
+StringBuffer
+==================
+mutable
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var args
+========
+JDK1.5 
+
+package day2;
+
+import java.sql.Date;
+
+public class OverloadingDemo {
+	
+	public void add() {
+		System.out.println("add without paramters");
+	}
+	public void add(int num1,int num2) {
+		System.out.println("add with two paramters");
+
+	}
+	public void add(int...numbers) {
+		int sum=0;
+		System.out.println("add with var args paramters");
+		for(int i:numbers) {
+				sum+=i;
+		}
+		System.out.println("Sum of all the numbers are :"+sum);
+	}
+	public void admitPatient(String patientName,String symptoms) {
+		System.out.println("admitting pateint with doctor details");
+	}
+	public void admitPatient(String patientName,String symptoms,String doctorName) {
+		
+	}
+	public static void main(String[] args) {
+			System.out.println(98.98);
+			System.out.println(true);
+			System.out.println("KK");
+			
+			OverloadingDemo demo = new OverloadingDemo();
+			demo.add(12,99,998,887);
+			demo.add(12,99,8);
+
+			
+	}
+}
+
+
+
+
+
+
+
+
+
+
+========================================================
+
+Inheritance
+
+
+extends
+
+
+
+
+
+
 
 
 
