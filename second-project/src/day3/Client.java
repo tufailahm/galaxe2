@@ -1,4 +1,4 @@
-package day2;
+package day3;
 
 class Vehicle
 {
@@ -16,12 +16,19 @@ class Car extends Vehicle {
 	int price=3000;
 	public void startAC() {
 		System.out.println("Car AC Started");
-
+	}
+	//overriding
+	public void start() {
+		System.out.println("Car Started");
 	}
 	public void printCarDetails() {
 		int price=200000;
 		System.out.println("The price of the car is :"+this.price);
 	}
+}
+class Bike extends Vehicle
+{
+	
 }
 public class Client {
 

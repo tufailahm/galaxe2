@@ -278,6 +278,94 @@ Inheritance
 extends
 
 
+Instance Block
+Static block
+
+1.static block
+2.In main
+3.W Intance block
+4.W constructor
+5. Z instance block
+6. Z constructor
+Again
+3.W Intance block
+4.W constructor
+5. Z instance block
+6. Z constructor
+
+
+
+
+Inheritance
+Abstract class
+==================
+
+
+
+
+Interfaces
+====================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Interface
+Object class and it methods
+
+
+GC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
