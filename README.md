@@ -337,10 +337,64 @@ Interfaces
 
 
 Interface
+	public abstract void demo();
+	static final
 Object class and it methods
-
-
 GC
+Getters and Setters
+
+
+Customer
+	customerId
+	customerName
+	customerAddress
+	billAmount
+
+Exception Handling
+
+==================
+
+Compile time - syntax
+Logical error 
+
+Runtime error	- happens at execution time of your program
+
+why exception handling
+===================
+
+1) to not terminate program abrutly
+2) to give proper error messages
+3) to perform some important/closing operations
+
+
+try
+catch
+finally
+
+
+Exception heirarchy
+===============
+
+Throwable
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,6 +1,6 @@
 package day2;
 
-public class Demo {
+public class Demo extends Object{
 	
 	public void add() {
 		
@@ -9,7 +9,11 @@ public class Demo {
 		
 	}
 	public static void main(String[] args) {
+		
+		Demo d = new Demo();
+		
 		String name1 = "Neha";
+		name1="Ahmed";
 		String name2 = new String( "Neha");
 		
 		System.out.println(name1==name2);		//true
