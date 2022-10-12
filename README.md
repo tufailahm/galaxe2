@@ -379,6 +379,25 @@ Throwable
 
 
 
+Day 5
+=============
+Exception Handling
+Threads
+I/O
+
+
+
+throw
+-----------
+keyword used to bring exception
+
+
+user defined exception
+
+
+
+
+throws
 
 
 
@@ -409,25 +428,77 @@ Throwable
 
 
 
+Threads
+====================
+java.lang	- Thread		- extends
+java.lang	- Runnable	- implements
 
 
 
 
+Create four threads
+	
+	FIRST
+	SECOND
+	THIRD
+	FOURTH
+
+
+	THIRD
+	FIRST
+
+
+Lifecycle of thread
+============
+
+#1: 3
+#1: 2
+#1: 1
+#2: 3
+#3: 3
+#3: 2
+#2: 2
+#2: 1
+#3: 1
+
+
+Thread safety
+Sync
+
+
+Collection framework
+===============
+framework which reduces programming efforts.
+lots of useful interfaces and classes
+easy learning curve
+
+
+java.util package
+
+<I>				Collection		
+<I>	
+<I>		List			Set
+		accept duplicate values	no duplicate values		
+
+<C>
+
+		ArrayList	(NSync)		HashSet  -(no order is guranteed)
+		LinkedList		TreeSet (sorted)
+		Vector	(Sync)		LinkedHashSet -(As it is)
 
 
 
+Generics
 
 
+Iterator
 
+used to iterate over a collection
 
-
-
-
-
-
-
-
-
+Collections
+------------
+class
+this class has lots of useful static methods like searching,sorting
 
 
 

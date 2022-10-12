@@ -16,6 +16,9 @@ public class Product {
 		this.productId = productId;
 		this.productName = productName;
 		this.quantityOnHand = quantityOnHand;
+		if(price<0)
+				throw new NegativePriceException("Price cannot be negative");
+
 		this.price = price;
 	}
 
