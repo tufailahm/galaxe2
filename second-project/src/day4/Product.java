@@ -1,11 +1,21 @@
 package day4;
 
 //Model - POJO (Plain old java objects)	- Entity
-public class Product {
+public class Product implements Comparable<Product> {
 	private int productId;
 	private String productName;
-	private  int quantityOnHand;
+	private int quantityOnHand;
 	private int price;
+
+	
+	@Override
+	public int compareTo(Product o) {
+		if (this.quantityOnHand > o.quantityOnHand)
+			return 0;
+		else
+			return -1;
+	}
+	
 	
 	public Product() {
 		// TODO Auto-generated constructor stub
@@ -16,8 +26,8 @@ public class Product {
 		this.productId = productId;
 		this.productName = productName;
 		this.quantityOnHand = quantityOnHand;
-		if(price<0)
-				throw new NegativePriceException("Price cannot be negative");
+		if (price < 0)
+			throw new NegativePriceException("Price cannot be negative");
 
 		this.price = price;
 	}
@@ -59,5 +69,7 @@ public class Product {
 		return "Product [productId=" + productId + ", productName=" + productName + ", quantityOnHand=" + quantityOnHand
 				+ ", price=" + price + "]";
 	}
-	
+
+
+
 }

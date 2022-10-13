@@ -514,6 +514,144 @@ this class has lots of useful static methods like searching,sorting
 
 
 
+	List<String> names = new ArrayList<String>();
+		names.add("A");
+		names.add("B");
+		names.add("C");
+		names.add("D");
+		
+		names.forEach(n -> System.out.println(n));
+
+
+
+
+
+package lambada;
+
+public class Lambada3 {
+
+	public static void main(String[] args) {
+		
+		Runnable runnable = () -> System.out.println("RUN CALLED BY :"+Thread.currentThread().getName());
+		Thread thread = new Thread(runnable);
+		
+		thread.start();
+		
+		System.out.println("MAIN CALLED by :"+Thread.currentThread().getName());
+
+	}
+}
+
+
+
+interface MathOperation
+{
+	int operation(int a,int b);
+}
+public class Lambada4 {
+
+	public static void main(String[] args) {
+		
+	    //without type declaration
+		MathOperation mathOperation = (a,b) -> a+b;
+		System.out.println(mathOperation.operation(12, 12));
+		
+		  //with type declaration
+		MathOperation mathOperation2 = (int a,int b) -> a - b;
+		System.out.println(mathOperation2.operation(12, 12));
+		
+		//with return statement along with curly braces
+		MathOperation mathOperation3 = (int a,int b) -> { return a * b; };
+		System.out.println(mathOperation3.operation(12, 12));
+
+
+
+
+
+
+Anonymous classes
+Inner classes
+
+
+_Interface
+Comparable	-java.lang	compareTo();
+
+Comparator	- java.util		compare(o1,o2)	- 
+
+
+
+
+
+Collections - Map
+
+
+
+
+-----------
+<I>	Map	- Key/Value
+	
+	HashMap		- no order
+	LinkedHashMap	- as it is 
+	TreeMap		-sorted
+	
+
+Key cannot be duplicate
+	
+
+Java8 New Features
+=======================
+
+Lambada expression
+streams
+new date and time
+
+Functional Interface - which has a single method 
+
+interface
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OO Design Principles & Patterns
+
+IO
+
+
+
+SOLID
+-------------
+
+Design patterns
+==================
+
+Singtelon Design pattern
+
+
+
+
+
 
 
 
