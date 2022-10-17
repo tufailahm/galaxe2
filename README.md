@@ -687,13 +687,16 @@ https://drive.google.com/file/d/1256Cl72t_ZtJdpv4GSzsJoFPL2Y4tlTd/view?usp=shari
 
 
 
-package com.a_demo;
-
+package com.training.galaxe.config;
 import java.util.Properties;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
+import org.hibernate.service.ServiceRegistry;
+
+import com.training.galaxe.model.Product;
 
 public class HibernateUtil {
 	
@@ -703,19 +706,19 @@ public class HibernateUtil {
 
 		Configuration configuration = new Configuration();
 
-		// Hibernate settings equivalent to hibernate.cfg.xml's properties
+//		Hibernate settings equivalent to hibernate.cfg.xml's properties
 		Properties settings = new Properties();
-		settings.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
-		settings.put(Environment.URL, "jdbc:mysql://localhost:3306/ofss?useSSL=false");
+		settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
+		settings.put(Environment.URL, "jdbc:mysql://localhost:3306/galaxe?useSSL=false");
 		settings.put(Environment.USER, "root");
 		settings.put(Environment.PASS, "root");
-		settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
+		settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
 
 		// settings.put(Environment.SHOW_SQL, "true");
 
 		settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
-		settings.put(Environment.HBM2DDL_AUTO, "update");
+		settings.put(Environment.HBM2DDL_AUTO, "create");
 
 		configuration.setProperties(settings);
 
@@ -723,17 +726,18 @@ public class HibernateUtil {
 		configuration.addAnnotatedClass(Product.class);
 
 		// required for mysql 8
-		// ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-		// .applySettings(configuration.getProperties()).build();
-		System.out.println("Hibernate Java Config serviceRegistry created");
-		// sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+		
+		  ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder() //
+		  .applySettings(configuration.getProperties()).build(); // sessionFactory =
+		  configuration.buildSessionFactory(serviceRegistry);
+		 		 
+		 //mySQL5
 		sessionFactory = configuration.buildSessionFactory();
 
 		return sessionFactory;
 
 	}
 }
-
 
 ===============================
 ORM - Hibernate
