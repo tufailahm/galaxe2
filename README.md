@@ -655,6 +655,121 @@ Singtelon Design pattern
 
 
 
+https://drive.google.com/file/d/1256Cl72t_ZtJdpv4GSzsJoFPL2Y4tlTd/view?usp=sharing
+
+
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.6.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.40</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.25.0-GA</version>
+		</dependency>
+
+
+
+package com.a_demo;
+
+import java.util.Properties;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.Environment;
+
+public class HibernateUtil {
+	
+	private static SessionFactory sessionFactory;
+
+	public static SessionFactory getSessionFactory() {
+
+		Configuration configuration = new Configuration();
+
+		// Hibernate settings equivalent to hibernate.cfg.xml's properties
+		Properties settings = new Properties();
+		settings.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
+		settings.put(Environment.URL, "jdbc:mysql://localhost:3306/ofss?useSSL=false");
+		settings.put(Environment.USER, "root");
+		settings.put(Environment.PASS, "root");
+		settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
+
+		// settings.put(Environment.SHOW_SQL, "true");
+
+		settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+
+		settings.put(Environment.HBM2DDL_AUTO, "update");
+
+		configuration.setProperties(settings);
+
+		// ***
+		configuration.addAnnotatedClass(Product.class);
+
+		// required for mysql 8
+		// ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+		// .applySettings(configuration.getProperties()).build();
+		System.out.println("Hibernate Java Config serviceRegistry created");
+		// sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+		sessionFactory = configuration.buildSessionFactory();
+
+		return sessionFactory;
+
+	}
+}
+
+
+===============================
+ORM - Hibernate
+
+Data
+
+
+something.save(product);
+
+Use case : We have to save our product data to database.
+
+Framework
+Maven
+
+Step 1: Create Maven Project
+
+
+
+DAO 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
