@@ -12,7 +12,11 @@ public interface ProductDAO {
 		public Product getProduct(int productId);
 		public List<Product> getProduct();
 		
+		public boolean isProductExists(int productId);
+		
 		public List<Product> searchProduct(String productName);
+		public List<Product> searchProduct(String productName,int price,int qoh);
+
 		public List<Product> searchProduct(int min,int max);
 		public List<Product> checkStockStatus(int minStock);
 	

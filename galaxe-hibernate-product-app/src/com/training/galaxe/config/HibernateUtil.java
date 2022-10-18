@@ -7,7 +7,10 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
+import com.training.galaxe.model.Contract_Employee;
+import com.training.galaxe.model.Employee;
 import com.training.galaxe.model.Product;
+import com.training.galaxe.model.Regular_Employee;
 
 public class HibernateUtil {
 	
@@ -35,6 +38,9 @@ public class HibernateUtil {
 
 		// ***
 		configuration.addAnnotatedClass(Product.class);
+		configuration.addAnnotatedClass(Employee.class);
+		configuration.addAnnotatedClass(Regular_Employee.class);
+		configuration.addAnnotatedClass(Contract_Employee.class);
 
 		// required for mysql 8
 		/*

@@ -765,6 +765,46 @@ DAO
 
 
 
+===============Day 2 Hiberanate
+
+Product App - Complete App
+Problems 
+Solution
+Query
+Criteria
+Synchronization in Hibernate
+Hibernate Inheritance Mapping
+
+
+HQL
+=========
+Hibernate query language	- SQL
+
+select * from product;
+select * from product where productName = 'Bottle';
+
+select * from product where productName = 'Bottle' and price = "+price
+
+
+
+Synchronization in Hibernate
+====================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
