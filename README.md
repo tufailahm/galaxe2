@@ -850,12 +850,34 @@ many more
 
 port = 8080
 
+9090
+
+@Component
+@Service
+@Controller
+@RestController
+@Repository
 
 
 
+Dev Tools in Spring boot - Live Reload (Automatically your app will restart - upon changes)
 
 
+Bill
+Customer
+Employee
+Orders
 
+getDetails()
+
+
+--------------
+product-app-final1
+
+String Data JPA
+Spring Web
+Devtools
+MySQL
 
 
 
