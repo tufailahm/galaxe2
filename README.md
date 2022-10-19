@@ -805,9 +805,50 @@ Synchronization in Hibernate
 
 
 
+Spring
+==============
+is a framework which manages the 
+
+DI 	-= Dependency injection
+IOC	- Inversion of control
+
+
+Payment
+
+
+	Payment p;		//NULL pointer exceptin
+
+
+	p.withdraw();
+
+
+Bean - A Spring bean is an object that is instantiated, created, and managed by the IoC container. Beans are the backbone of an application.
+
+Dependency injection - A programming design pattern that makes code loosely coupled, meaning that any change in the application of one, will not affect the other.
+
+Inversion of control (IoC) - Taking control away from the class and giving it to the Spring Framework.
 
 
 
+Spring -
+Lot of configurations
+
+Spring Boot
+==========
+Zero configuration
+Embedded tomcat
+
+
+Spring Core
+Spring JPA
+Spring Hibernate
+Spring AOP
+Spring JDBC
+Spring MVC
+many more
+
+
+port = 8080
 
 
 
