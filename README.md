@@ -882,6 +882,45 @@ MySQL
 
 
 
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/galaxe
+spring.datasource.username=root
+spring.datasource.password=root
+spring.jpa.hibernate.ddl-auto=create
+
+server.port=9090
+
+
+
+
+
+
+REST
+=================
+
+
+
+
+http://localhost:9090/	- <YOUR NAME>
+http://localhost:9090/welcome	- WELCOME TO GALAXE
+http://localhost:9090/hi/welcome	- WELCOME TO HI APP
+
+
+http://192.168.8.8:9090/welcome
+
+
+Parameters in REST
+
+@PathVariable
+@RequestBody
+
+
+HTTP Methods
+
+GET	- RETRIEVE 
+POST	- CREATE/INSERT
+PUT	- UPDATE/MODIFY
+DELETE	- REMOVE/DELETE
 
 
 
@@ -890,3 +929,22 @@ MySQL
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E:\NewTrainingMaterial\react_mongo_rest\crud-app-react
