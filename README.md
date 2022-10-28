@@ -922,6 +922,143 @@ POST	- CREATE/INSERT
 PUT	- UPDATE/MODIFY
 DELETE	- REMOVE/DELETE
 
+=============================
+Spring Boot
+	JPA keywords
+	Lombok
+	AOP
+	Actuator
+
+
+Use case : We want to search by product name
+
+http://localhost:9090/product/searchByProductName/Lakme
+
+Keywords
+
+	public List<Product> findByProductName(String productName);
+	public List<Product> findByPrice(int price);		
+
+
+
+http://localhost:9090/product/searchByProductPriceRange/100/200
+
+
+
+
+
+https://teams.microsoft.com/l/meetup-join/19:918f1078f6134f4cbab54661753b4590@thread.tacv2/1666672206903?context=%7B%22Tid%22:%22f05cf28c-208e-4f41-bb7d-64141a37a2f9%22,%22Oid%22:%2239a8210a-3bb7-4b75-a78d-a941b948b148%22%7D
+
+
+
+
+
+
+
+
+Lombok
+==========
+
+Reduces the boilerplate code of pojo class
+
+
+
+
+
+
+
+AOP
+========
+
+package com.ust.pms.aspects;
+
+import java.util.Date;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+@Component
+@Aspect
+public class ProductServiceAspect {
+
+	private static final Logger log = LoggerFactory.getLogger(ProductServiceAspect.class);
+
+	@Before(value =  "execution(* com.ust.pms.service.ProductService.*(..))")
+	public void beforeAdvice(JoinPoint joinpoint)
+	{
+			System.out.println("##########Before Advice aspect called :: ");
+	}
+	
+	@After(value =  "execution(* com.ust.pms.service.ProductService.*(..))")
+	public void afterAdvice(JoinPoint joinpoint)
+	{
+		Signature methods = joinpoint.getSignature();
+		
+		log.info(methods.getName() + " , method execution 1 completed successfully at :"+new Date());
+			System.out.println("##########After Advice aspect called :: ");
+	}
+	
+	@Around(value =  "execution(* com.ust.pms.service.ProductService.*(..))")
+	public Object around(ProceedingJoinPoint joinpoint) throws Throwable
+	{
+		Signature methods = joinpoint.getSignature();
+		
+		log.info(methods.getName() + " , method execution AROUND (BEFORE) successfully at :"+new Date());
+			System.out.println("##########UST GLOBAL AROUND  :: ");
+			
+		Object retval = joinpoint.proceed();
+		
+		log.info(methods.getName() + " , method execution AROUND (AFTER) successfully at :"+new Date());
+		System.out.println("##########UST GLOBAL AROUND  :: ");
+		
+		return retval;
+	}
+	
+}
+
+
+
+
+
+
+------
+
+@EnableAspectJAutoProxy(proxyTargetClass = true)
+
+
+-------
+
+AOP
+=========
+Aspect Oriented Programming
+
+Use case : Cross cutting concerns
+
+Aspect 
+
+Logging
+security
+transaction
+
+Pointcut expressions
+
+*Product
+*.com.service
+
+@Before		- called before the method
+@After		- called after the method
+@Around		- called before and after the method
+@Throws		-Exception
+
+Use case : We want to do logging for every method of service class (ProductServiceImpl)
 
 
 
@@ -947,4 +1084,293 @@ DELETE	- REMOVE/DELETE
 
 
 
-E:\NewTrainingMaterial\react_mongo_rest\crud-app-react
+actuator,lombok,rest respository
+
+
+
+
+
+package com.training;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.Data;
+
+@Entity
+@Data
+public class Reviews {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    private String reviewName;
+    private String reviewByEmail;
+    private int rating;
+
+    // standard getters and setters
+}
+
+
+------------
+
+package com.training;
+
+import java.util.List;
+
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+@RepositoryRestResource(collectionResourceRel = "reviews", path = "reviews")
+public interface ReviewsRepository extends PagingAndSortingRepository<Reviews, Long> {
+    List<Reviews> findByReviewName(@Param("reviewName") String reviewName);
+}
+
+--------------------
+
+server.port=9090
+
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/galaxe
+spring.datasource.username=root
+spring.datasource.password=root
+spring.jpa.hibernate.ddl-auto=update
+
+
+-------------------
+
+
+application.properties
+management.endpoints.web.exposure.include=*
+
+Run and check (Postman)
+http://localhost:8080/actuator/beans
+
+
+--------------------
+dev tools, open feign, lombok, spring web
+Feign Client
+
+
+package com.training;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class AppController {
+
+	@Autowired
+	private ProductClient productClient;
+
+	@GetMapping("/productData/{id}")
+	public Product getData(@PathVariable int id) {
+		return productClient.getProductData(id);
+	}
+}
+package com.training;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+@FeignClient(name = "product-client", url = "http://localhost:9090")
+public interface ProductClient {
+    @GetMapping("/product/{productId}")
+    Product getProductData(@PathVariable int productId);
+}
+package com.training;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+
+@SpringBootApplication
+@EnableFeignClients
+public class ADemo2Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ADemo2Application.class, args);
+	}
+
+}
+
+
+=======================================================================
+Day 14
+AOP
+
+
+Around
+
+Microservices vs Monolithic
+Spring Data Rest
+Actuator
+Communication between two microservices application
+
+
+
+
+
+Microservices vs Monolithic
+======================
+
+amazon
+	product	http://localhost:9090/product
+	cart
+	orders
+	payment
+	offers
+	prime
+	reviews	http://localhost:9091/reviews
+
+http://localhost:9091/reviews	- GET
+http://localhost:9091/reviews/101	- GET
+http://localhost:9091/reviews	- POST
+http://localhost:9091/reviews	- PUT
+http://localhost:9091/reviews/101	- DELETE
+
+
+New : Spring Data Rest 
+
+
+Actuator
+=============
+Spring 
+
+Use case : I want to see how many beans are there using actuator
+
+
+
+
+
+
+
+
+
+
+
+Spring Security
+==============
+
+Authentication
+Authorization
+
+
+Inbuilt -Login Form based login Security
+Custom login form
+
+@Bean
+
+UserDetailsService
+
+
+
+
+User Case : Custom Login Form and also we need to implement authorization and authentication using spring security
+
+Spring MVC - Model View Controller
+
+RESTCONTROLLER	-->JSON	-->  Another Application
+CONTROLLER	--> HTML	--> User
+
+
+
+
+Step 1: Create spring starter project - web,security,lombok,devtools
+
+Step 2: Update pom.xml
+
+<dependency>
+			<groupId>javax.servlet.jsp.jstl</groupId>
+			<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
+		<!-- Tomcat for JSP rendering -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+Step 3 : Update application.properties
+
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
+
+Step 4:
+** Right click on your project
+Create the above folder /src/main/webapp/WEB-INF/views/
+
+
+Step5: Create HomeController and LoginController
+
+package com.training.pms.galaxe.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HomeController {
+
+	@RequestMapping("/hello")					//localhost:9094/hello
+	public String hello() {
+		return "Hello and welcome to my APP";
+	}
+	
+}
+
+
+---------
+package com.training.pms.galaxe.controller;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+@Controller
+public class LoginController {
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)			//localhost:9094/login
+	public String login(Model model, String error, String logout) {
+		if (error != null)
+			model.addAttribute("errorMsg", "Your username and password are invalid.");
+
+		if (logout != null)
+			model.addAttribute("msg", "You have been logged out successfully.");
+
+		return "login";					//  /WEB-INF/views/login.jsp
+	}
+	
+	@RequestMapping(value = "/ahmed", method = RequestMethod.GET)			//localhost:9094/login
+	public String ahmed() {
+		return "galaxe";					//  /WEB-INF/views/galaxe.jsp
+	}
+
+}
+
+Step 6 : Create jsp pages
+
+
+
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+
+File I/O
+=========
